@@ -1,13 +1,15 @@
 import java.util.Scanner;
 
 public class ProyectoCD {
+	// Variables Globales
 	static Scanner teclado = new Scanner (System.in);
 	static Scanner teclado1 = new Scanner (System.in);
 	static Scanner teclado2 = new Scanner (System.in);
-	static int size1 = 25;
+	static int size1 = 30;
+	static int size2 = 150;
 	static Cantante [] cant = new Cantante[size1];
 	static Genero [] gen = new Genero [size1];
-	static Canciones [] can = new Canciones [size1];
+	static Canciones [] can = new Canciones [size2];
 	static Ingreso [] ing = new Ingreso [size1];
 	static int opcion;
 	static int opcion1;
@@ -15,11 +17,9 @@ public class ProyectoCD {
 	static int contador_cantante;
 	static int contador_ingresos;
 	static int contador_canciones;
-
-
-
 	public static void main(String[] args) {
 		boolean salir = false;
+		boolean regresar = false;
 		
 		while (!salir) {
 			header_c();
@@ -35,34 +35,37 @@ public class ProyectoCD {
 					break;
 					
 				case 3:
-						String x;
-						modulo_cd ();
-						System.out.print("\t Por favor seleccione la opcion a realizar: ");
-						opcion1 = teclado.nextInt();
-						
-						switch (opcion1) {
-							case 1:
-									ingresar_cd();
-								break;
-							case 2:
-									System.out.print("\t Ingrese el idcd a consultar: ");
-									x = teclado2.nextLine();
-									consultar(x);
-								break;
-							case 3:
-									System.out.print("\t Ingrese el idcd a modificar: ");
-									x = teclado1.nextLine();
-									modificar(x);
-								break;
-							case 4:
+						while(!regresar){
+							String x;
+							modulo_cd ();
+							System.out.print("\t Por favor seleccione la opcion a realizar: ");
+							opcion1 = teclado.nextInt();
 							
-								break;
-							case 5:
-							
-								break;
-							default :
-								System.out.println("Son numeros entre 1 - 5:");
+							switch (opcion1) {
+								case 1:
+										ingresar_cd();
+									break;
+								case 2:
+										System.out.print("\t Ingrese el idcd a consultar: ");
+										x = teclado2.nextLine();
+										consultar(x);
+									break;
+								case 3:
+										System.out.print("\t Ingrese el idcd a modificar: ");
+										x = teclado1.nextLine();
+										modificar(x);
+									break;
+								case 4:
+								
+									break;
+								case 5:
+										regresar = true;
+									break;
+								default :
+									System.out.println("Son numeros entre 1 - 5:");
+							}
 						}
+						
 					break;
 					
 				case 4:
@@ -113,10 +116,12 @@ public class ProyectoCD {
 	public static void ingreso_genero () {
 		int x;
 		String genero;
+
 		System.out.println( "     ---------------------------------------------------------------------");
 		System.out.print("\t\t Ingrese la Cantidad de Generos agregar:");
 		x = teclado.nextInt();
-		int p;
+
+		int p; // Variable para capturar el contador antes de hacer el siguiente ingreso cuando ya hay data existente
 		p = contador_genero;
 		contador_genero = contador_genero + x;
 		
@@ -125,7 +130,7 @@ public class ProyectoCD {
 			System.out.printf("\t\t\t Ingrese el Nombre del Genero: ");
 			genero = teclado1.nextLine();
 			gen[p] = new Genero ("GN000" + (p + 1),genero);
-			p++;
+			p++;//3,4,5
 		}
 
 		System.out.println( "     ---------------------------------------------------------------------");
@@ -158,7 +163,8 @@ public class ProyectoCD {
 		System.out.println( "     ---------------------------------------------------------------------");
 		System.out.print("\t\t Ingrese la Cantidad de Cantantes agregar:");
 		x = teclado.nextInt();
-		int p;
+		
+		int p; // Variable para capturar el contador antes de hacer el siguiente ingreso cuando ya hay data existente
 		p = contador_cantante;
 		contador_cantante = contador_cantante + x;
 
@@ -174,7 +180,6 @@ public class ProyectoCD {
 
 		for(int i = 0; i < x; i++){
 			if(p<=1){
-
 				p = x - p;
 				System.out.println( "\t\t\t " + cant[p].idcantante + " \t  " +  cant[p].cantante);
 			}else{
@@ -226,7 +231,7 @@ public class ProyectoCD {
 		System.out.println( "  Consultar....................(2)        | |  | | |__) |  || | |__  | '  / |" );
 		System.out.println( "  Modificar....................(3)        | |  | |  ___/| . ` |  __| | |'/| | " );
 		System.out.println( "  Eliminar..,..................(4)        | |__| | |    | |'  | |    | |  | | " );
-		System.out.println( "  Salir / Exit.................(5)        |_____/|_|    |_| '_|_|    |_|  |_| \n" );
+		System.out.println( "  Volver al menu Principal.....(5)        |_____/|_|    |_| '_|_|    |_|  |_| \n" );
 	}
 	
 	public static void ingresar_cd () {
@@ -238,21 +243,23 @@ public class ProyectoCD {
 		String cantante;
 		String idcantante;
 		boolean bandera = false;
+		boolean bandera2 = false; 
 
 		System.out.println( "     ---------------------------------------------------------------------\n");
 		System.out.print("\t\t Ingrese la Cantidad de CD para agregar:");
 		x = teclado.nextInt();
-		int p;
+
+		int p; // Variable para capturar el contador antes de hacer el siguiente ingreso cuando ya hay data existente
 		p = contador_ingresos;
 		contador_ingresos = contador_ingresos + x;
 		
 		
 		for (int i = 0; i < x; i++) {
-			idCD = "CD000" + (p+1);
+			idCD = "CD000" + (p+1); 
 			if(i > 0){
 				System.out.println( "     ---------------------------------------------------------------------");
 			}
-			System.out.printf("\t\t\t Ingrese titulo del Album: ");
+			System.out.printf("\t\t\t Ingrese titulo del Album [" + (i+1) + "] : ");
 			titulo = teclado1.nextLine();
 			System.out.printf("\t\t\t Ingrese el Codigo del Genero Para el Album: ");
 			idgenero = teclado2.nextLine();
@@ -269,33 +276,41 @@ public class ProyectoCD {
 
 				if(!cantante.equals("0")){
 					ing[p] = new Ingreso (idCD,titulo,genero,cantante);
+					bandera2 = true;
+				}else{
+					p--;
+					contador_ingresos--;
 				}
-				p++;	
+				p++;
 			}	
 		}
 
-		for (int i = 0; i < contador_ingresos; i++) {
-			System.out.println( "     ---------------------------------------------------------------------");
-			System.out.println( "\t IDCD  \t       Titulo  \t       Genero  \t       Cantante");
-			System.out.println( "\t" + ing[i].idcd + "\t\t" + ing[i].titulo + "\t\t" + ing[i].genero + "\t\t " + ing[i].cantante +"\n");
-			for(int j=0; j < contador_canciones; j++){
-				if(j <= 0){
-					System.out.println( "     ---------------------------------------------------------------------");
-					System.out.println( "\t\t\t      Canciones ");
-				}
-				if(can[j].idcd.equals(ing[i].idcd)){
-					System.out.println("\t\t        " + (j+1) + ". " + can[j].nombre);
-					bandera = true;
-				}else{
-					if(bandera){
-						j = contador_canciones;
-						bandera = false;
+		if(bandera2){
+			for (int i = 0; i < contador_ingresos; i++) {
+				System.out.println( "     ---------------------------------------------------------------------");
+				System.out.println( "\t IDCD  \t       Titulo  \t       Genero  \t       Cantante");
+				System.out.println( "\t" + ing[i].idcd + "\t\t" + ing[i].titulo + "\t\t" + ing[i].genero + "\t\t " + ing[i].cantante +"\n");
+				for(int j=0; j < contador_canciones; j++){
+					if(j <= 0){
+						System.out.println( "     ---------------------------------------------------------------------");
+						System.out.println( "\t\t\t      Canciones ");
+					}
+					if(can[j].idcd.equals(ing[i].idcd)){
+						System.out.println("\t\t        " + (j+1) + ". " + can[j].nombre);
+						bandera = true;
+					}else{
+						if(bandera){
+							j = contador_canciones;
+							bandera = false;
+						}
 					}
 				}
 			}
+			System.out.println( "     ---------------------------------------------------------------------\n");
+			sleep(4000);
+		}else{
+			contador_ingresos = contador_ingresos - x;
 		}
-		System.out.println( "     ---------------------------------------------------------------------\n");
-		sleep(4000);
 	}
 
 	public static void modificar(String idcd){
@@ -345,7 +360,7 @@ public class ProyectoCD {
 							System.out.println("\t\t        " + (j+1) + ". " + can[j].nombre);
 							bandera1 = true;
 					}else{
-						if(bandera){
+						if(bandera1){
 							j = contador_canciones;
 							bandera1 = false;
 						}
@@ -444,7 +459,7 @@ public class ProyectoCD {
 		boolean bandera = false;
 		if(contador_genero <= 0) {
 			System.out.println( "\n     ---------------------------------------------------------------------\n");
-				System.out.printf("\t No Existe el ningun idgenero por lo que no podra agregara el CD favor intentelo de nuevo! \n\n");
+				System.out.printf("\t No Existe ningun idgenero por lo que no podra agregara el CD favor intentelo de nuevo! \n\n");
 				System.out.println( "     ---------------------------------------------------------------------\n");
 				sleep(4000);
 		}else {

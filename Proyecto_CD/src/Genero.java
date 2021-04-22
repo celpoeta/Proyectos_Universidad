@@ -4,8 +4,8 @@ public class Genero {
 	String genero;
 
 	Genero (String idgenero,String genero ){
-	this.idgenero = idgenero;
-	this.genero = genero;
+		this.idgenero = idgenero;
+		this.genero = genero;
 	}
 
 	public boolean existe_consulta (String idgenero,String idconsulta) {
