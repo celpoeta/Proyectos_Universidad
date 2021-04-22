@@ -382,7 +382,7 @@ public class ProyectoCD {
 							System.out.println("\t\t        " + (j+1) + ". " + can[j].nombre);
 							bandera1 = true;
 					}else{
-						if(bandera){
+						if(bandera1){
 							j = contador_canciones;
 							bandera1 = false;
 						}
@@ -421,7 +421,7 @@ public class ProyectoCD {
 							System.out.println("\t\t        " + (j+1) + ". " + can[j].nombre);
 							bandera1 = true;
 					}else{
-						if(bandera){
+						if(bandera1){
 							j = contador_canciones;
 							bandera1 = false;
 						}
