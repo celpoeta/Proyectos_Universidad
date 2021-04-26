@@ -476,6 +476,8 @@ public class ProyectoCD {
 		return  "0";
 	}
 
+	
+
 	public static  String existe_cantante (String idcantante) {
 		boolean bandera = false;
 		if(contador_cantante <= 0) {
@@ -502,6 +504,7 @@ public class ProyectoCD {
 			Thread.sleep(time);
 		} catch (Exception e) {}
 	}
+
 }
 
 
